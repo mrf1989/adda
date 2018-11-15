@@ -21,7 +21,6 @@ Prácticas con Java de la asignatura Análisis y Diseño de Datos y Algoritmos (
     - Recursiva final en C.
     - Recursiva no final con memoria en C.
 - **Ejercicio 2** (EJ.70): Diseñar un algoritmo para el cálculo de un número combinatorio a partir de la siguiente definición:
-<img src="./images/pract3-ej2.png" alt="Definición para ejercicio 2 de práctica 3." width=80% style="display:block">
-Proporcione una solución:
+<img src="./images/pract3-ej2.png" alt="Definición para ejercicio 2 de práctica 3." width=80% style="display:block"> <br>Proporcionar una solución:
     - Recursiva no final sin memoria en Java.
     - Recursiva no final con memoria en Java.
