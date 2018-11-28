@@ -24,3 +24,12 @@ Prácticas con Java de la asignatura Análisis y Diseño de Datos y Algoritmos (
 <img src="./images/pract3-ej2.png" alt="Definición para ejercicio 2 de práctica 3." width=80% style="display:block"> <br>Proporcionar una solución:
     - Recursiva no final sin memoria en Java.
     - Recursiva no final con memoria en Java.
+
+
+## Práctica 4
+
+- **Ejercicio 1** (EJ.77): Sea *a* un array de n elementos de tipo entero ordenados en orden estrictamente creciente. Encontrar un algoritmo de complejidad (log n) en el caso peor, para determinar la posición *i* tal que ``a[i] = i``.
+    - Solución iterativa (usando while).
+    - Solución funcional.
+    - Solución recursiva lineal.
+- **Ejercicio 2** (EJ.71): Se dispone de una lista no ordenada de canciones. Se quiere buscar la canción que ocuparía la posición *k* si estuvieran ordenadas según su duración (primero las canciones más cortas).
