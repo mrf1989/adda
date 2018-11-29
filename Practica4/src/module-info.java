@@ -6,4 +6,5 @@
  *
  */
 module Practica4 {
+	requires us.lsi.partecomun;
 }
