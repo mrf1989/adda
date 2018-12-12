@@ -33,3 +33,20 @@ Prácticas con Java de la asignatura Análisis y Diseño de Datos y Algoritmos (
     - Solución funcional.
     - Solución recursiva lineal.
 - **Ejercicio 2** (EJ.71): Se dispone de una lista no ordenada de canciones. Se quiere buscar la canción que ocuparía la posición *k* si estuvieran ordenadas según su duración (primero las canciones más cortas).
+
+
+## Práctica 5
+
+- **Ejercicio 1** (EJ.104): Determinar si un árbol *n-ario* contiene una etiqueta dada.
+- **Ejercicio 2** (EJ.106): Comprobar si dos árboles *n-arios* son iguales.
+- **Ejercicio 3** (EJ.102): Obtener la menor etiqueta de un árbol binario respecto a un orden.
+- **Ejercicio 4** (EJ.108): Obtener la copia simétrica de árbol binario.
+
+
+## Práctica 6
+
+- **Ejercicio 1** (EJ.101): Suma de las etiquetas del árbol (binario / *n-ario*) que son pares (asumiendo que son de tipo Integer).
+- **Ejercicio 2** (EJ.116): Convertir un árbol binario en una lista que contiene sus etiquetas en recorrido en posorden. En este recorrido se añaden primero las etiquetas de su hijo izquierdo, luego las del derecho y por último la etiqueta del árbol actual.
+- **Ejercicio 3** (EJ.43): Encontrar la raíz cuadrada de un número (la raíz cuadrada de un entero *a* es el mayor valor de un entero *n* tal que *a* >= *n*^2). (Iterativo, recursivo y funcional).
+    - Usar una búsqueda secuencial en el rango de 2...*n*-1.
+    - Usar una búsqueda binaria en el rango de 2...*n*-1.
