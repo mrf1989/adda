@@ -18,6 +18,8 @@ public class Test78 {
 		System.out.println("Test 2: buscar palabra amor: " + Metodos78.buscaPalabra(ls, "amor"));
 		// Test 3. Buscar palabra del extremo final de la lista
 		System.out.println("Test 3: buscar palabra zoo: " + Metodos78.buscaPalabra(ls, "zoo"));
+		// Test 4. Buscar palabra cualquiera
+		System.out.println("Test 4: buscar palabra karma: " + Metodos78.buscaPalabra(ls, "karma"));
 
 	}
 

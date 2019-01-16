@@ -46,9 +46,33 @@ public class Test138 {
 		BinaryTree<Integer> tBE = BinaryTree.empty();
 		BinaryTree<Integer> tB4 = BinaryTree.binary(4, tBE, tB16);
 		
-		System.out.println("TEST 2: Árbol Binario equilibrado");
+		System.out.println("TEST 2: Árbol Binario no equilibrado");
 		System.out.println("=================================");
 		System.out.println("¿Árbol binario equilibrado? " + Metodos138.estaEquilibrado(tB4));
+		System.out.println();
+		
+		// Test 3. Árbol Binario equilibrado (árbol vacío)
+		
+		BinaryTree<Integer> tCE = BinaryTree.empty();
+		
+		System.out.println("TEST 3: Árbol Binario equilibrado (árbol vacío)");
+		System.out.println("=================================");
+		System.out.println("¿Árbol binario equilibrado? " + Metodos138.estaEquilibrado(tCE));
+		System.out.println();
+		
+		// Test 4. Árbol Binario equilibrado (diferencia de 1)
+		
+		BinaryTree<Integer> tD6 = BinaryTree.leaf(6);
+		BinaryTree<Integer> tD10 = BinaryTree.leaf(10);
+		BinaryTree<Integer> tD5 = BinaryTree.binary(5, tD6, tD10);
+		
+		BinaryTree<Integer> tD8 = BinaryTree.leaf(8);
+		BinaryTree<Integer> tD2 = BinaryTree.binary(2, tD8, tD5);
+		
+		System.out.println("TEST 4: Árbol Binario equilibrado (diferencia de 1)");
+		System.out.println("=================================");
+		System.out.println("¿Árbol binario equilibrado? " + Metodos138.estaEquilibrado(tD2));
+		System.out.println();
 		
 	}
 

@@ -4,6 +4,14 @@ import java.util.List;
 
 public class Metodos78 {
 	
+	/**
+	 * 
+	 * Busca la cadena String en la lista ordenada y devuelve el índice de su posición.
+	 * En caso de no encontrarse devuelve -1.
+	 * @param ls Lista ordenada cadenas String.
+	 * @param str String a buscar en la lista ls.
+	 * @return int
+	 */
 	public static int buscaPalabra(List<String> ls, String str) {
 		return buscaPalabraGen(ls, str, 0, ls.size());
 	}
