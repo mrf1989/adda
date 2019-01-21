@@ -9,7 +9,7 @@ import java.util.Map;
 import punto.Cuadrante;
 import punto.Punto;
 
-public class Ejercicios {
+public class Iterativos {
 	
 	// Ejercicio 1
 	public static Double sumaReales(List<Double> ls) {
@@ -224,6 +224,24 @@ public class Ejercicios {
 			e = e + 1;
 		}
 		return b;
+	}
+	
+	// Ejercicio 19
+	public static Long siguientePrimo(Long n) {
+		Boolean b = false;
+		Long e = n + 1;
+		Long r = null;
+		if (n % 2 == 0) {
+			e = e + 1;
+		}
+		while (!b) {
+			if (esPrimo(e)) {
+				b = true;
+				r = e;
+			}
+			e = e + 2;
+		}
+		return r;
 	}
 
 	// Ejercicio 20
