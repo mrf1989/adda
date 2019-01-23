@@ -43,5 +43,9 @@ public class PuntoImpl implements Punto {
 		}
 		return c;
 	}
+	
+	public String toString() {
+		return "[" + x + ", " + y + "]";
+	}
 
 }

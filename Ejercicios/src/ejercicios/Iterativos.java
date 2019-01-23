@@ -8,6 +8,7 @@ import java.util.Map;
 
 import punto.Cuadrante;
 import punto.Punto;
+import punto.PuntoImpl;
 
 public class Iterativos {
 	
@@ -69,7 +70,7 @@ public class Iterativos {
 	// Ejercicio 6
 	public static Double buscarMayorA(List<Double> ls, Double n) {
 		Integer e = 0;
-		Double a = -1.;
+		Double a = null;
 		Boolean b = false;
 		while (e < ls.size() && !b) {
 			b = ls.get(e) > n;
@@ -83,25 +84,24 @@ public class Iterativos {
 	
 	// Ejemplo 7
 	public static List<Punto> simetriaY(List<Punto> ls) {
-		List<Punto> a = new ArrayList<>();
+		List<Punto> r = new ArrayList<>();
 		Integer e = 0;
 		while (e < ls.size()) {
-			Punto p = ls.get(e);
-			p.setX(0 - p.getX());
-			a.add(p);
+			Punto p = new PuntoImpl(0 - ls.get(e).getX(), ls.get(e).getY());
+			r.add(p);
 			e = e + 1;
 		}
-		return a;
+		return r;
 	}
 	
 	// Ejercicio 8
-	public static Double mayorX(List<Punto> ls) {
-		Double a = null;
+	public static Punto mayorX(List<Punto> ls) {
+		Punto a = null;
 		Integer e = 0;
 		while (e < ls.size()) {
 			Double c = ls.get(e).getX();
-			if (a == null || c.compareTo(a) > 0) {
-				a = c;
+			if (a == null || c.compareTo(a.getX()) > 0) {
+				a = ls.get(e);
 			}
 			e = e + 1;
 		}
