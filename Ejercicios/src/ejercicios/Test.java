@@ -7,6 +7,7 @@ import java.util.List;
 
 import punto.Punto;
 import punto.PuntoImpl;
+import us.lsi.common.Tuple2;
 
 public class Test {
 
@@ -37,6 +38,8 @@ public class Test {
 		Integer[] arr3 = {1, 5, 3, 7, 1, 1, 5, 3, 5};
 		List<Integer> ls2 = Arrays.asList(arr3);
 		
+		Integer[] arr4 = {9, 2, 6, 4, 3, 5, 1, 5, 10, 39, 11, 1, 2, 3, 4, 5, 2, 1, 2, 3, 54, 44, 23, 22, 12, 3};
+		List<Integer> ls3 = Arrays.asList(arr4);
 	}
 
 }

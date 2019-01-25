@@ -1,6 +1,7 @@
 package ejercicios;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +9,205 @@ import java.util.Map;
 import punto.Cuadrante;
 import punto.Punto;
 import punto.PuntoImpl;
+import us.lsi.common.Lists2;
+import us.lsi.common.Tuple;
+import us.lsi.common.Tuple2;
+import utiles.Listas;
 
 public class Recursivos {
 	
+	// Búsqueda binaria
+	public static <E extends Comparable<? super E>> Integer bb(List<E> ls, E n) {
+		return bb(ls, n, 0, ls.size() - 1);
+	}
+	
+	private static <E extends Comparable<? super E>> Integer bb(List<E> ls, E n, int i, int j) {
+		Integer r;
+		int k;
+		if (j - i < 0) {
+			r = -1;
+		} else {
+			k = (i + j) / 2;
+			if (ls.get(k).compareTo(n) == 0) {
+				r = k;
+			} else if (ls.get(k).compareTo(n) > 0) {
+				r = bb(ls, n, i, k - 1);
+			} else {
+				r = bb(ls, n, k + 1, j);
+			}
+		}
+		return r;
+	}
+	
+	// Bandera Holandesa
+	public static <E> Tuple2<Integer, Integer> bh(List<E> ls, E p, Comparator<E> cmp) {
+		List<Integer> la = bh(ls, p, 0, 0, ls.size(), cmp, new ArrayList<>());
+		Tuple2<Integer, Integer> r = Tuple.asTuple2(la);
+		return r;
+	}
+	
+	private static <E> List<Integer> bh(List<E> ls, E p, int a, int b, int c, Comparator<E> cmp, List<Integer> acum) {
+		if (c - b <= 0) {
+			acum.add(a);
+			acum.add(b);
+		} else {
+			if (cmp.compare(ls.get(b), p) < 0) {
+				Listas.intercambiar(ls, a, b);
+				bh(ls, p, a + 1, b + 1, c, cmp, acum);
+			} else if (ls.get(b).equals(p)) {
+				bh(ls, p, a, b + 1, c, cmp, acum);				
+			} else {
+				Listas.intercambiar(ls, b, c - 1);
+				bh(ls, p, a, b, c - 1, cmp, acum);
+			}
+		}
+		return acum;
+	}
+	
+	// Bandera Portuguesa
+	public static <E> Integer bp(List<E> ls, E p, Comparator<E> cmp) {
+		return bp(ls, p, 0, ls.size(), cmp);
+	}
+	
+	private static <E> Integer bp(List<E> ls, E p, int i, int j, Comparator<E> cmp) {
+		Integer r;
+		if (j - i <= 0) {
+			r = i;
+		}
+		else {
+			if (cmp.compare(ls.get(i), p) < 0) {
+				r = bp(ls, p, i + 1, j, cmp);
+			} else {
+				Listas.intercambiar(ls, i, j - 1);
+				r = bp(ls, p, i, j - 1, cmp);
+			}
+		}
+		return r;
+	}
+	
+	// * Fibonacci de n (algoritmo recursivo con memoria)
+	public static Long fib(Integer n) {
+		Map<Integer, Long> m = new HashMap<>();
+		return fib(n, m);
+	}
+	
+	private static Long fib(Integer n, Map<Integer, Long> m) {
+		Long r;
+		if (m.containsKey(n)) {
+			r = m.get(n);
+		} else if (n <= 1) {
+			r = (long) n;
+			m.put(n, r);
+		} else {
+			r = fib(n - 1, m) + fib(n - 2, m);
+			m.put(n, r);
+		}
+		return r;
+	}
+	
+	// QuickSort
+	public static <E extends Comparable<E>> void quickSort(List<E> ls) {
+		Comparator<E> cmp = Comparator.naturalOrder(); 
+		quickSort(ls, 0, ls.size() - 1, cmp);
+	}
+
+	private static <E> void quickSort(List<E> ls, int i, int j, Comparator<E> cmp) {
+		if (i < j) {
+			E p = ls.get((i + j) / 2);
+			int index = particion(ls, i, j, p, cmp);
+			quickSort(ls, i, index - 1, cmp);
+			quickSort(ls, index, j, cmp);
+		}
+	}
+
+	private static <E> int particion(List<E> ls, int i, int j, E p, Comparator<E> cmp) {
+		while (i <= j) {
+			while (cmp.compare(ls.get(i), p) < 0) {
+				i++;
+			}
+			while (cmp.compare(ls.get(j), p) > 0) {
+				j--;
+			}
+			if (i <= j) {
+				Listas.intercambiar(ls, i, j);
+				i++;
+				j--;
+			}
+		}
+		return i;
+	}
+	
+	// MergeSort
+	public static <E extends Comparable<? super E>> void mergeSort(List<E> ls) {
+		Comparator<E> cmp = Comparator.naturalOrder();
+		List<E> tmp = Lists2.newList(ls);
+		mergeSort(ls, 0, ls.size(), cmp, tmp);
+	}
+
+	private static <E> void mergeSort(List<E> ls, int i, int j, Comparator<E> cmp, List<E> tmp) {
+		if (j - i > 1) {
+			int k = (i + j) / 2;
+			mergeSort(ls, i, k, cmp, tmp);
+			mergeSort(ls, k, j, cmp, tmp);
+			mezcla(ls, i, k, ls, k, j, tmp, i, j, cmp);
+			copia(ls, i, j, tmp);
+		}
+	}
+	
+	private static <E> void mezcla(List<E> ls1, int i1, int j1, List<E> ls2, int i2, int j2, List<E> ls3, int i3, int j3, Comparator<E> cmp) {
+		int k1 = i1, k2 = i2, k3 = i3;
+		while (k3 < j3) {
+			if (k1 < j1 && k2 < j2) {
+				if (cmp.compare(ls1.get(k1), ls2.get(k2)) <= 0) {
+					ls3.set(k3, ls1.get(k1));
+					k1++;
+				} else {
+					ls3.set(k3, ls2.get(k2));
+					k2++;
+				}
+			} else if (k2 == j2) {
+				ls3.set(k3, ls1.get(k1));
+				k1++;
+			} else {
+				ls3.set(k3, ls2.get(k2));
+				k2++;
+			}
+			k3++;
+		}
+	}
+	
+	private static <E> void copia(List<E> ls, int i, int j, List<E> tmp) {
+		for (int k = i; k < j; k++) {
+			ls.set(k, tmp.get(k));
+		}
+	}
+	
+	// K-ésimo
+	public static <E extends Comparable<? super E>> E getKesimo(List<E> ls, int k) {
+		Comparator<E> cmp = Comparator.naturalOrder();
+		return escogeKesimo(ls, 0, ls.size(), k, cmp);
+	}
+
+	private static <E> E escogeKesimo(List<E> ls, int i, int j, int k, Comparator<E> cmp) {
+		E r;
+		if (j - i == 0) {
+			r = null;
+		} else if (j - i == 1) {
+			r = ls.get(i);
+		} else {
+			E p = ls.get(((i + j) / 2) + 1);
+			Tuple2<Integer, Integer> tp = bh(ls, p, cmp);
+			if (k < tp.v1) {
+				r = escogeKesimo(ls, i, tp.v1, k, cmp);
+			} else if (k >= tp.v2) {
+				r = escogeKesimo(ls, tp.v2, j, k, cmp);
+			} else {
+				r = ls.get(k);
+			}
+		}
+		return r;
+	}
+
 	// Ejercicio 1
 	public static Double sumaReales(List<Double> ls) {
 		return sumaReales(ls, ls.size(), 0.0);

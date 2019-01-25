@@ -9,8 +9,81 @@ import java.util.Map;
 import punto.Cuadrante;
 import punto.Punto;
 import punto.PuntoImpl;
+import us.lsi.common.Tuple;
+import us.lsi.common.Tuple2;
+import utiles.Listas;
 
 public class Iterativos {
+	
+	// Búsqueda Binaria
+	public static <E extends Comparable<? super E>> Integer bb(List<E> ls, E n) {
+		Integer r = -1;
+		int i = 0;
+		int j = ls.size() - 1;
+		int k;
+		Boolean b = false;
+		while (j - i >= 0 && !b) {
+			k = (i + j) / 2;
+			if (ls.get(k).compareTo(n) == 0) {
+				r = k;
+				b = true;
+			} else if (ls.get(k).compareTo(n) > 0) {
+				j = k - 1;
+			} else {
+				i = k + 1;
+			}
+		}
+		return r;
+	}
+	
+	// Bandera Holandesa
+	public static <E> Tuple2<Integer, Integer> bh(List<E> ls, E p, Comparator<E> cmp) {
+		return bh(ls, p, 0, ls.size(), cmp);
+	}
+	
+	private static <E> Tuple2<Integer, Integer> bh (List<E> ls, E p, int i, int j, Comparator<E> cmp) {
+		int a, b, c;
+		a = i;
+		b = i;
+		c = j;
+		List<Integer> la = new ArrayList<>();
+		while (c - b > 0) {
+			if (cmp.compare(ls.get(b), p) < 0) {
+				Listas.intercambiar(ls, a, b);
+				a++;
+				b++;
+			} else if (ls.get(b).equals(p)) {
+				b++;
+			} else {
+				Listas.intercambiar(ls, b, c - 1);
+				c--;
+			}
+		}
+		la.add(a);
+		la.add(b);
+		Tuple2<Integer, Integer> t = Tuple.asTuple2(la);
+		return t;
+	}
+	
+	// Bandera Portuguesa
+	public static <E> Integer bp(List<E> ls, E p, Comparator<E> cmp) {
+		return bp(ls, p, 0, ls.size(), cmp);
+	}
+	
+	private static <E> Integer bp(List<E> ls, E p, int i, int j, Comparator<E> cmp) {
+		int a, b;
+		a = i;
+		b = j;
+		while (b - a > 0) {
+			if (cmp.compare(ls.get(a), p) < 0) {
+				a++;
+			} else {
+				Listas.intercambiar(ls, a, b - 1);
+				b--;
+			}
+		}
+		return a;
+	}
 	
 	// Ejercicio 1
 	public static Double sumaReales(List<Double> ls) {

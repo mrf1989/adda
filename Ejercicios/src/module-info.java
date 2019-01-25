@@ -6,4 +6,5 @@
  *
  */
 module Ejercicios {
+	requires us.lsi.partecomun;
 }
