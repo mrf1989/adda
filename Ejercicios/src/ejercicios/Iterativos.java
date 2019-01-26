@@ -1,11 +1,13 @@
 package ejercicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ficheros.Ficheros;
 import punto.Cuadrante;
 import punto.Punto;
 import punto.PuntoImpl;
@@ -302,11 +304,8 @@ public class Iterativos {
 	// Ejercicio 19
 	public static Long siguientePrimo(Long n) {
 		Boolean b = false;
-		Long e = n + 1;
+		Long e = (Long) (n % 2 == 0 ? n + 1 : n + 2);
 		Long r = null;
-		if (n % 2 == 0) {
-			e = e + 1;
-		}
 		while (!b) {
 			if (esPrimo(e)) {
 				b = true;
@@ -431,6 +430,22 @@ public class Iterativos {
 			i = i + 1;
 		}
 		return a;
+	}
+	
+	// Ejercicio 59
+	public static void guardaPrimos(String nombreArchivo, Long n) throws IOException {
+		List<Long> a = new ArrayList<>();
+		if (n > 2) {
+			a.add(2L);
+			Long e = 2L;
+			while (e < n) {
+				e = siguientePrimo(e);
+				if (e <= n) {
+					a.add(e);
+				}
+			}
+		}
+		Ficheros.escribir(a, "./data/" + nombreArchivo);
 	}
 
 }

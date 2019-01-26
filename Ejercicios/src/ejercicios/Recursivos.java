@@ -1,11 +1,13 @@
 package ejercicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ficheros.Ficheros;
 import punto.Cuadrante;
 import punto.Punto;
 import punto.PuntoImpl;
@@ -412,5 +414,25 @@ public class Recursivos {
 			puntosPorCuadrante(ls, i + 1, mp);
 		}
 		return mp;
+	}
+	
+	// Ejercicio 59
+	public static void guardaPrimos(String nombreArchivo, Long n) throws IOException {
+		List<Long> ls = new ArrayList<>();
+		if (n >= 2) {
+			ls.add(2L);
+		}
+		guardaPrimos(nombreArchivo, n, 2L, ls);
+	}
+
+	private static void guardaPrimos(String nombreArchivo, Long n, Long e, List<Long> a) throws IOException {
+		Long tmp = Iterativos.siguientePrimo(e);
+		if (tmp <= n) {
+			a.add(tmp);
+			guardaPrimos(nombreArchivo, n, tmp, a);
+		} else {
+			Ficheros.escribir(a, "./data/" + nombreArchivo);
+		}
+		
 	}
 }
