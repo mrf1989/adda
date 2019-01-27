@@ -433,6 +433,24 @@ public class Recursivos {
 		} else {
 			Ficheros.escribir(a, "./data/" + nombreArchivo);
 		}
-		
+	}
+	
+	// Ejercicio 60
+	public static void guardaPrimosCuadrados(String nombreArchivo, Long n) throws IOException {
+		List<Long> ls = new ArrayList<>();
+		if (n >= 2) {
+			ls.add(2L * 2L);
+		}
+		guardaPrimosCuadrados(nombreArchivo, n, 2L, ls);
+	}
+
+	private static void guardaPrimosCuadrados(String nombreArchivo, Long n, long e, List<Long> a) throws IOException {
+		Long tmp = Iterativos.siguientePrimo(e);
+		if (tmp <= n) {
+			a.add(tmp * tmp);
+			guardaPrimosCuadrados(nombreArchivo, n, tmp, a);
+		} else {
+			Ficheros.escribir(a, "./data/" + nombreArchivo);
+		}
 	}
 }
