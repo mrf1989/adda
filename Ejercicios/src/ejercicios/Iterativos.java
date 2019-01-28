@@ -1,11 +1,14 @@
 package ejercicios;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import ficheros.Ficheros;
 import punto.Cuadrante;
@@ -446,6 +449,47 @@ public class Iterativos {
 			}
 		}
 		Ficheros.escribir(a, "./data/" + nombreArchivo);
+	}
+	
+	// Ejercicio 62
+	public static void fechasOrdenadas(String path, LocalDate from, LocalDate to, String nombreArchivo) throws IOException {
+		List<String> fichero = Ficheros.leer(path);
+		List<LocalDate> fechas = fichero.stream()
+				.map(e -> LocalDate.parse(e, DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+				.collect(Collectors.toList());
+		fechas = ordenarFechas(fechas, 0, fechas.size() - 1, Comparator.naturalOrder());
+		List<String> output = fechas.stream()
+				.filter(d -> d.compareTo(from) >= 0 && d.compareTo(to) <= 0)
+				.map(d -> d.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+				.collect(Collectors.toList());
+		Ficheros.escribir(output, nombreArchivo);
+	}
+
+	private static List<LocalDate> ordenarFechas(List<LocalDate> fechas, int i, int j, Comparator<LocalDate> cmp) {
+		if (i < j) {
+			LocalDate p = fechas.get((i + j) / 2);
+			int index = particion(fechas, i, j, p, cmp);
+			ordenarFechas(fechas, i, index - 1, cmp);
+			ordenarFechas(fechas, index, j, cmp);
+		}
+		return fechas;
+	}
+
+	private static int particion(List<LocalDate> fechas, int i, int j, LocalDate p, Comparator<LocalDate> cmp) {
+		while (i <= j) {
+			while (cmp.compare(fechas.get(i), p) < 0) {
+				i++;
+			}
+			while (cmp.compare(fechas.get(j), p) > 0) {
+				j--;
+			}
+			if (i <= j) {
+				Listas.intercambiar(fechas, i, j);
+				i++;
+				j--;
+			}
+		}
+		return i;
 	}
 
 }
